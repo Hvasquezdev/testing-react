@@ -3,47 +3,59 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
-function formatDate(date) {
-  return date.toLocaleString();
-}
-
-function Avatar(props) {
-  return (
-    <img className="Avatar" src={props.user.avatarUrl} alt={props.user.name} />
-  );
-}
-
-function UserInfo(props) {
-  return (
-    <div className="UserInfo">
-      <Avatar user={props.user} />
-      <div className="UserInfo-name">{props.user.name}</div>
-    </div>
-  );
-}
-
-function Comment(props) {
-  return (
-    <div className="Comment">
-      <UserInfo user={props.author} />
-      <div className="Comment-text">{props.text}</div>
-      <div className="Comment-date">{formatDate(props.date)}</div>
-    </div>
-  );
-}
-
-const comment = {
-  date: new Date(),
-  text: "I hope you enjoy learning React!",
-  author: {
-    name: "Hello Kitty",
-    avatarUrl: "https://placekitten.com/g/64/64"
+class Square extends React.Component {
+  render() {
+    return <button className="square">{/* TODO */}</button>;
   }
-};
+}
 
-const element = (
-  <Comment date={comment.date} text={comment.text} author={comment.author} />
-);
+class Board extends React.Component {
+  renderSquare(i) {
+    return <Square />;
+  }
 
+  render() {
+    const status = "Next player: X";
+
+    return (
+      <div>
+        <div className="status">{status}</div>
+        <div className="board-row">
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(3)}
+          {this.renderSquare(4)}
+          {this.renderSquare(5)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(6)}
+          {this.renderSquare(7)}
+          {this.renderSquare(8)}
+        </div>
+      </div>
+    );
+  }
+}
+
+class Game extends React.Component {
+  render() {
+    return (
+      <div className="game">
+        <div className="board-game">
+          <Board />
+        </div>
+        <div className="game-info">
+          <div>{/*Status*/}</div>
+          <ol>{/*TODO*/}</ol>
+        </div>
+      </div>
+    );
+  }
+}
+
+const element = <Game />;
 const rootElement = document.getElementById("root");
 ReactDOM.render(element, rootElement);
